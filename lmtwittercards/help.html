@@ -1,0 +1,209 @@
+<h3>Plugin overview</h3>
+
+<p>
+The NP_LMTwitterCards plugin adds <a href="https://dev.twitter.com/cards/overview">Twitter Cards</a> metadata to the items in your Nucleus blog. 
+There is also an option to add <a href="http://ogp.me/">Open Graph</a> metadata.
+</p>
+
+
+<h3>Installation</h3>
+
+<ul>
+<li>
+Upload the <code>NP_LMTwitterCard.php</code> file and the <code>lmtwittercard</code> directory 
+from the zip file to the Nucleus CMS plugins directory (<code>nucleus/plugins</code>) on your web server.
+</li>
+<li>
+Go to the Plugins page in the admin area. You should be able to select the plugin in the dropdown list under the 
+"Install New Plugin" section and press the "Install Plugin" button.
+</li>
+</ul>
+
+<h3>Upgrade</h3>
+
+<ul>
+<li>
+Take a backup of the current plugin files. You will need these if you want to rollback to the previous version after the upgrade.
+</li>
+<li>
+Take a backup of the database used for you Nucleus installation.
+</li>
+<li>
+Replace the old plugin files with the new ones. Do not uninstall the plugin.
+</li>
+<li>
+If a plugin data upgrade is needed, will an upgrade plugin data option be 
+available on the NP_LMOrdered plugin admin page. Choose this option to upgrade the plugin data.
+</li>
+<li>
+After the plugin data upgrade has been performed may a rollback option and a commit option be available on the NP_LMOrdered 
+plugin admin page. Not all upgrades support the rollback and commit option.
+</li>
+<li>
+If you are not pleased with the new version of the plugin you may use the rollback option to rollback the plugin data upgrade. 
+After the rollback of the plugin data upgrade you have to replace the new plugin files with the old plugin files.
+</li>
+<li>
+If you are pleased with the new version of the plugin you should use the commit option to commit the plugin data upgrade. 
+After the commit of the plugin data upgrade will any rollback and commit options disappear.
+</li>
+</ul>
+
+
+<h3>Configuration</h3>
+
+<p>
+The NP_LMTwitterCards plugin has the following plugin options:
+</p>
+
+<ul>
+<li>
+<b>Default card type</b> - Twitter card type that should be the default type for all blogs.
+</li>
+<li>
+<b>Default Twitter @username of website</b> - Twitter @username of the website that should be default for all blogs. 
+</li>
+<li>
+<b>Default Twitter @username of content creator</b> - Twitter @username of the content creator that should be default for all members.
+</li>
+<li>
+<b>Default image URL to use</b> - URL to image to be default for all blogs.  
+</li>
+<li>
+<b>Use Open Graph meta tags</b> - Should the Open Graph compatible meta data for Twitter Cards be used. 
+Will also include the obligatory Open Graph meta data that is not used by Twitter Cards if set to Yes.
+</li>
+</ul>
+
+<p>
+The NP_LMTwitterCards plugin has the following blog options:
+</p>
+
+<ul>
+<li>
+<b>Card type to use for this blog</b> - Twitter card type that should be used for this blog. 
+If set to none will no Twitter Cards be added to items in this blog.
+</li>
+<li>
+<b>Twitter @username of website for this blog</b> - Twitter @username of the website that should be used for this blog. 
+If empty will the website @username set in the plugin options be used.
+</li>
+<li>
+<b>Default image URL to use for this blog</b> - URL to image to be default for all items in this blog. 
+If empty will the image URL set in the plugin options be used.
+</li>
+</ul>
+
+<p>
+The NP_LMTwitterCards plugin has the following member options:
+</p>
+
+<ul>
+<li>
+<b>Twitter @username of content creator for this member</b> - Twitter @username of the content creator that should be used for all items this member is author of.
+If empty will the content creator @username set in the plugin options be used.
+</li>
+</ul>
+
+<p>
+The NP_LMTwitterCards plugin has the following items options:
+</p>
+
+<ul>
+<li>
+<b>Image URL to use for this item</b> - URL to image to be used for this item. 
+If empty will the image from the first <code>&lt;%image%&gt;</code> variable in the the item body or extended item body be used. 
+If no <code>&lt;%image%&gt;</code> variable was found will the image URL set in the blog options be used.
+</li>
+</ul>
+
+
+<h3>Usage</h3>
+
+<p>
+After the plugin is installed and configured you need to add the <code>TwitterCard</code> skin variable to you item skin. 
+This skin variable is described in the TwitterCard section in the help document.
+</p>
+
+<p>
+The next step is to validate the Twitter Card for one of your blog items on the Twitter <a href="https://cards-dev.twitter.com/validator">Card validator</a>. 
+If the validation is successful you will have the option to request approval from Twitter to use Twitter Cards for your sites. 
+After the approval is given will Twitter show your Twitter Cards when you link items in your blog from your tweets.
+</p>
+
+<p>
+It is recommended that you validate the Twitter Card of new items before you use links to the items in tweets. 
+</p>
+
+<h3>TwitterCard metadata</h3>
+
+<p>
+The follwing TwitterCard metadata is inserted in each item:
+</p>
+
+<ul>
+<li>
+<b>twitter:card</b> - Configured card type.
+</li>
+<li>
+<b>twitter:site</b> - Configured Twitter @username of webside. Not inserted if configuration is empty.
+</li>
+<li>
+<b>twitter:creator</b> - Configured Twitter @username of content creator. Not inserted if configuration is empty.
+</li>
+<li>
+<b>twitter:title</b> - Item title. Shortened if the title is longer than 70 characters. 
+If shortened will no partial words be included and a <code>...</code> will be added. 
+</li>
+<li>
+<b>twitter:description</b> - The description is taken from the 200 first characters of the item body. 
+If shortened will no partial words be included and a <code>...</code> will be added.
+</li>
+<li>
+<b>twitter:image:src</b> - Configured image URL or image URL from the first <code>&lt;%image%&gt;</code> variable used in the item body or extended item body.
+</li>
+</ul>
+
+<h3>TwitterCard skin variable</h3>
+<p>
+Skin variable used to insert the Twitter Card metadata into a blog item. Add this skin variable to the <code>&lt;head&gt;</code> section of your item skin. 
+This skin variable is safe to use in all types of skins, but will only insert metadata in item skins.
+</p>
+
+<pre>
+&lt%LMTwitterCards(TwitterCard)%&gt;
+</pre>
+
+
+<h3>Support and Bug reports</h3>
+
+<p>
+For additional support and/or bug reports please use the Nucleus forum 
+<a href="http://forum.nucleuscms.org/viewtopic.php?t=21338">plugin announce thread</a> 
+or the <a href="http://nucleus.slightlysome.net/plugins/lmtwittercards">plugin page</a> comment section.
+</p>
+
+
+<h3>Compability</h3>
+
+<p>
+This version of the NP_LMTwitterCard plugin is tested against version 3.66 of LMNucleus CMS. 
+The minimum version of Nucleus CMS needed for using this plugin is 3.60.
+</p>
+
+
+<h3>Version History</h3>
+
+<ul>
+<li><b>v1.0.0 2014-11-05:</b> by Leo (http://nucleus.slightlysome.net/leo)</li>
+<ul>
+<li>Initial release.</li>
+</ul>
+</ul>
+
+<h3>Download</h3>
+
+<p>
+<a href="http://nucleus.slightlysome.net/files/NP_LMTwitterCards_v100.zip" title="Download NP_LMTwitterCards_v100.zip">Download NP_LMTwitterCards v1.0.0</a>.
+The latest version of the NP_LMTwitterCards plugin can be downloaded from the NP_LMTwitterCards <a href="http://nucleus.slightlysome.net/plugins/lmtwittercards">plugin page</a>.
+</p>
